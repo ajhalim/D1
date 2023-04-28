@@ -1,4 +1,4 @@
-To meet all the requirements our slideshow, we added 3 scenes to our slides and had an example of the theme of our game being
+To meet all the requirements for our slideshow, we added 3 scenes to our slides and had an example of the theme of our game being
 based around college struggles. There are scenes of a person with pencil trying to fight off midterms and finals. In another scene
 you have a weapon to fight off the sleep paralysis demons to stay awake for class. The last scene had hands and a tie to simulate an
 employer asking questions during an interview, and the player is equipped with a resume. The audio assets were made with what we had
