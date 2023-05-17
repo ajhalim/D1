@@ -111,4 +111,3 @@ const game = new Phaser.Game({
     scene: [logo,scene1,scene2,scene3],
     title: "D1",
 });
-
