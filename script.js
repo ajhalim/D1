@@ -1,104 +1,36 @@
-class abeGame extends Phaser.Scene {
-    constructor() {
-        super('abeGame');
+
+class logo extends Phaser.Scene {
+    constructor(){
+        super('logo');
     }
-    
     preload(){
         this.load.path = './assets/';
-        this.load.image('studio', 'STUDIO.jpg');
-
-        //this.load.path = './assets';
+        this.load.image('logo', 'STUDIO.png');
         this.load.image('scene1', 'scene1.png');
         this.load.image('scene2', 'scene2.PNG');
         this.load.image('scene3', 'scene3 (1).png');
+        this.load.audio('demon', 'demon.wav');
+        this.load.audio('write', 'write.wav');
     }
     create(){
-        this.studio = this.add.image(
-            screen.width/2,//x
-            screen.height/2,//y
-            'studio',//imagename
-        )
-        this.studio.setScale(0.8) //resize
+        this.add.image(960, 540, 'logo');
+        this.add.text(700,1000,"Click to continue").setFontSize(40)
+        this.input.on('pointerdown', () => this.scene.start('scene1'));
+    }
+}
 
-        //this.studio.onclick = test;
-        
-        this.tweens.add({
-            targets: this.studio,
-            alpha:0,
-            duration: 1000,
-            ease: 'Linear',
-            //repeat: -1,
-        });
-        
-        this.scene1 = this.add.image(
-            screen.width/2,//x
-            screen.height/2,//y
-            'scene1',//imagename
-        )
-        this.scene1.alpha = 0;
+class scene1 extends Phaser.Scene {
+    constructor(){
+        super('scene1');
+    }
+    create() {
+        this.add.image(960, 540, 'scene1');
+        this.add.text(700,1000,"Click to continue").setFontSize(40)
+        this.textObject = this.add.text(800,40,"Exams").setFontSize(40)
+        this.input.on('pointerdown', () => this.scene.start('scene2'));
 
-        this.tweens.add({
-            targets: this.scene1,
-            alpha:1,
-            duration: 2000,
-            ease: 'Linear',
-            yoyo: true,
-
-            //repeat: -1,
-        });
-
-
-
-        this.scene2 = this.add.image(
-            screen.width/2,//x
-            screen.height/2,//y
-            'scene2',//imagename
-        )
-        this.scene2.alpha = 0;
-
-        this.tweens.add({
-            targets: this.scene2,
-            alpha:1,
-            duration: 8000,
-            ease: 'Linear',
-            yoyo: true,
-
-            //repeat: -1,
-        });
-
-        this.scene3 = this.add.image(
-            screen.width/2,//x
-            screen.height/2,//y
-            'scene3',//imagename
-        )
-        this.scene3.alpha = 0;
-
-        
-
-        this.tweens.add({
-            targets: this.scene3, 
-            alpha:1,
-            duration: 8000,
-            ease: 'Linear',
-            yoyo: true,
-
-            //repeat: -1,
-        });
-
-        //var timeline = scene.tweens.createTimeline();
-
-        this.textObject = this.add.text(
-            0, //x
-            0,//y
-            "College is hard \nSo we made a pretty bad art/game demo thing for it \nHave anoter line to fullfil requirements", //text
-            {
-                font: "40px Arial",
-                color: "black",
-                alpha: 0,
-            } //style
-
-            
-        );
+        this.write = this.sound.add('write');
+        this.write.play();
 
         this.tweens.add({
             targets: this.textObject, 
@@ -111,24 +43,72 @@ class abeGame extends Phaser.Scene {
 
             repeat: -1,
         });
-        
     }
-    update(){
-        
-    }
+}
 
-    
+class scene2 extends Phaser.Scene {
+    constructor(){
+        super('scene2');
+    }
+    create() {
+        this.add.image(960, 540, 'scene2');
+        this.add.text(700,1000,"Click to continue").setFontSize(40)
+        this.textObject = this.add.text(550,40,"Paralysis Vision/Insomnia").setFontSize(40)
+        this.input.on('pointerdown', () => this.scene.start('scene3'));
+
+        this.demon = this.sound.add('demon');
+        this.demon.play();
+
+        this.tweens.add({
+            targets: this.textObject, 
+            //alpha:1,
+            x:screen.width,
+            y:0,
+            duration: 8000,
+            ease: 'Linear',
+            yoyo: true,
+
+            repeat: -1,
+        });
+    }
+}
+
+class scene3 extends Phaser.Scene {
+    constructor(){
+        super('scene3');
+    }
+    create() {
+        this.add.image(960, 540, 'scene3');
+        this.add.text(700,1000,"Click to continue").setFontSize(40)
+        this.textObject = this.add.text(550,40,"Have you had any job experience?\nWhat are your worst qualities?\nWhy should we hire you?").setFontSize(40)
+        //this.add.text(550,140,"What are your worst qualities?").setFontSize(40)
+        //this.add.text(550,240,"Why should we hire you?").setFontSize(40)
+        this.input.on('pointerdown', () => this.scene.start('logo'));
+
+
+        this.tweens.add({
+            targets: this.textObject, 
+            //alpha:1,
+            x:screen.width,
+            y:0,
+            duration: 8000,
+            ease: 'Linear',
+            yoyo: true,
+
+            repeat: -1,
+        });
+    }
 }
 
 
+const game = new Phaser.Game({
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 1920,
+        height: 1080
+    },
+    scene: [logo,scene1,scene2,scene3],
+    title: "D1",
+});
 
-let config = {
-    type: Phaser.WEBGL,
-    width: screen.width,
-    height: screen.height,
-    backgroundColor: 0xFFFFFF,
-    scene: [abeGame],
-
-}
-
-let game = new Phaser.Game(config);
